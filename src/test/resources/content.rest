@@ -1,0 +1,43 @@
+
+### Get plant list
+GET http://localhost:8080/api/v1/content/plant
+
+### Create new plant
+PUT http://localhost:8080/api/v1/content/plant
+Content-Type: application/json
+
+{
+  "name": "betula pendula"
+}
+###
+PUT http://localhost:8080/api/v1/content/plant
+Content-Type: application/json
+
+{
+  "name": "Salix arctica"
+}
+
+### Get images for plant
+GET http://localhost:8080/api/v1/content/plant/824f1857-c36c-4340-9f67-ad4c0ea87757/image
+
+### Create new image
+PUT http://localhost:8080/api/v1/content/plant/824f1857-c36c-4340-9f67-ad4c0ea87757/image
+Content-Type: application/json
+
+{
+  "url": "http://bla.bla/bla/2"
+}
+
+### Get text ids
+GET http://localhost:8080/api/v1/content/plant/824f1857-c36c-4340-9f67-ad4c0ea87757/text
+
+### Get chunk text
+GET http://localhost:8080/api/v1/content
+ /plant/824f1857-c36c-4340-9f67-ad4c0ea87757
+ /text/489f3add-f3b4-4d20-9cca-0e2c0a1978e8
+
+### Create new text
+PUT http://localhost:8080/api/v1/content/plant/824f1857-c36c-4340-9f67-ad4c0ea87757/text
+
+bla bla bla
+

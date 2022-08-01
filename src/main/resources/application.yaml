@@ -1,0 +1,10 @@
+
+datasource:
+  pg:
+    jdbcUrl: jdbc:postgresql://localhost:21001/plantdb
+    username: penguin
+    password: SecretPassw0rd
+  mysql:
+    jdbcUrl: jdbc:mysql://localhost:21003/plantdb
+    username: root
+    password: SecretPassw0rd

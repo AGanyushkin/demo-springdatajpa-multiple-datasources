@@ -1,0 +1,62 @@
+version: "3.5"  
+
+services:
+
+  demo-postgres:
+    image: postgres:14.3
+    container_name: demo-postgres
+    networks:
+      - demo-network
+    ports:
+      - 21001:5432
+    environment:
+      - POSTGRES_USER=penguin
+      - POSTGRES_PASSWORD=SecretPassw0rd
+      - POSTGRES_DB=plantdb
+    restart: unless-stopped
+    volumes:
+      - ./init/pg:/docker-entrypoint-initdb.d
+
+  demo-pgadmin:
+    container_name: demo-pgadmin
+    image: dpage/pgadmin4:6.12
+    environment:
+      PGADMIN_DEFAULT_EMAIL: penguin@mail.com
+      PGADMIN_DEFAULT_PASSWORD: SecretPassw0rd
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - 21002:80
+    networks:
+      - demo-network
+    restart: unless-stopped
+
+  demo-mysql:
+    image: mysql:8.0.30
+    container_name: demo-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: SecretPassw0rd # for "root" user
+      MYSQL_USER: penguin
+      MYSQL_PASSWORD: SecretPassw0rd
+    networks:
+      - demo-network
+    ports:
+      - 21003:3306
+    restart: unless-stopped
+    volumes:
+      - ./init/mysql:/docker-entrypoint-initdb.d
+
+  demo-phpmyadmin:
+    image: phpmyadmin:5.2.0
+    container_name: demo-phpmyadmin
+    restart: unless-stopped
+    networks:
+      - demo-network
+    ports:
+      - 21004:80
+    environment:
+      - PMA_ARBITRARY=1
+
+networks:
+
+  demo-network:
+    driver: bridge
